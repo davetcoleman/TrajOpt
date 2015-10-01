@@ -108,6 +108,8 @@ for i=1:length(opt)
             OPT.multiCheb = defaults_multiCheb(opt(i).defaultAccuracy);
         case 'rungeKutta'
             OPT.rungeKutta = defaults_rungeKutta(opt(i).defaultAccuracy);
+                    case 'midpoint'
+            OPT.midpoint = defaults_midpoint(opt(i).defaultAccuracy);
         case 'gpops'
             OPT.gpops = defaults_gpops(opt(i).defaultAccuracy);
         otherwise
@@ -207,6 +209,26 @@ end
 end
 
 
+function OPT_midpoint = defaults_midpoint(accuracy)
+
+switch accuracy
+    case 'low'
+        OPT_midpoint.nSegment = 15;
+        OPT_midpoint.nSubStep = 2;
+    case 'medium'
+        OPT_midpoint.nSegment = 25;
+        OPT_midpoint.nSubStep = 2;
+    case 'high'
+        OPT_midpoint.nSegment = 30;
+        OPT_midpoint.nSubStep = 3;
+    otherwise
+        error('Invalid value for options.defaultAccuracy')
+end
+
+end
+
+
+
 function OPT_rungeKutta = defaults_rungeKutta(accuracy)
 
 switch accuracy
@@ -227,7 +249,6 @@ end
 
 
 
-
 function OPT_gpops = defaults_gpops(accuracy)
 
 OPT_gpops.bounds.phase.integral.lower = -inf;
@@ -237,7 +258,7 @@ OPT_gpops.guess.phase.integral = 0;
 OPT_gpops.name = 'TrajOpt_GPOPS';
 OPT_gpops.auxdata = [];
 OPT_gpops.nlp.solver = 'ipopt'; % {'ipopt','snopt'}
-OPT_gpops.derivatives.dependencies = 'full';  %’full’, ’sparse’ or ’sparseNaN’
+OPT_gpops.derivatives.dependencies = 'full';  %ï¿½fullï¿½, ï¿½sparseï¿½ or ï¿½sparseNaNï¿½
 OPT_gpops.derivatives.supplier = 'sparseCD'; %'sparseCD';  %'adigator'
 OPT_gpops.derivatives.derivativelevel = 'first'; %'second';
 OPT_gpops.mesh.method = 'hp-PattersonRao';

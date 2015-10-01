@@ -152,7 +152,7 @@ problem = getDefaultOptions(problem); % Complete options struct
 
 % Loop over the options struct to solve the problem
 nIter = length(problem.options);
-soln(nIter) = struct('grid',[],'interp',[],'info',[],'problem',[]); 
+soln(nIter) = struct('grid',[],'interp',[],'info',[],'problem',[]);
 P = problem;  %Temp variable for passing on each iteration
 for iter=1:nIter
     P.options = problem.options(iter);
@@ -178,6 +178,8 @@ for iter=1:nIter
             soln(iter) = multiCheb(P);
         case 'rungeKutta'
             soln(iter) = rungeKutta(P);
+        case 'midpoint'
+            soln(iter) = midpoint(P);
         case 'gpops'
             soln(iter) = gpopsWrapper(P);
         otherwise
