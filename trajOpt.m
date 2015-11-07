@@ -179,6 +179,8 @@ for iter=1:nIter
             soln(iter) = rungeKutta(P);
         case 'gpops'
             soln(iter) = gpopsWrapper(P);
+        case 'radauCollocation'
+            soln(iter) = radauCollocation(P);
         otherwise
             error('Invalid method. Type: ''help trajOpt'' for a valid list.');
     end

@@ -77,9 +77,10 @@ problem.guess.control = [0, 0];
 
 % method = 'trapazoid';
 % method = 'hermiteSimpson';
-method = 'chebyshev';
+% method = 'chebyshev';
 % method = 'rungeKutta';
 % method = 'gpops';
+method = 'radauCollocation';
 
 switch method
     case 'trapazoid'
@@ -155,6 +156,10 @@ switch method
     case 'gpops'
         problem.options.method = 'gpops';
         problem.options.defaultAccuracy = 'medium';
+        
+    case 'radauCollocation'       
+        problem.options.method = 'radauCollocation'; % Select the transcription method
+        problem.options.defaultAccuracy = 'low';
         
     otherwise
         error('Invalid method!');

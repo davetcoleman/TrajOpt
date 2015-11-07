@@ -58,10 +58,6 @@ end
 
 %%%% Method-specific details to pass along to solver:
 
-% Quadrature weights for trapazoid integration:
-problem.func.weights = ones(nGrid,1);
-problem.func.weights([1,end]) = 0.5;
-
 % Trapazoid integration calculation of defects:
 problem.func.defectCst = @computeDefects;
 

@@ -60,11 +60,6 @@ end
 
 %%%% Method-specific details to pass along to solver:
 
-%Simpson quadrature for integration of the cost function:
-problem.func.weights = (2/3)*ones(nGrid,1);
-problem.func.weights(2:2:end) = 4/3;
-problem.func.weights([1,end]) = 1/3;
-
 % Hermite-Simpson calculation of defects:
 problem.func.defectCst = @computeDefects;
 

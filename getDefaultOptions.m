@@ -110,6 +110,8 @@ for i=1:length(opt)
             OPT.rungeKutta = defaults_rungeKutta(opt(i).defaultAccuracy);
         case 'gpops'
             OPT.gpops = defaults_gpops(opt(i).defaultAccuracy);
+        case 'radauCollocation'
+            OPT.radauCollocation = defaults_radauCollocation(opt(i).defaultAccuracy);
         otherwise
             error('Invalid value for options.method');
     end
@@ -154,6 +156,9 @@ end
 end
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 function OPT_hermiteSimpson = defaults_hermiteSimpson(accuracy)
 
@@ -171,6 +176,9 @@ end
 end
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 function OPT_chebyshev = defaults_chebyshev(accuracy)
 
@@ -186,6 +194,9 @@ switch accuracy
 end
 
 end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 function OPT_multiCheb = defaults_multiCheb(accuracy)
@@ -207,6 +218,9 @@ end
 end
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 function OPT_rungeKutta = defaults_rungeKutta(accuracy)
 
 switch accuracy
@@ -226,6 +240,7 @@ end
 end
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 function OPT_gpops = defaults_gpops(accuracy)
@@ -261,3 +276,24 @@ switch accuracy
 end
 
 end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+function OPT_radauCollocation = defaults_radauCollocation(accuracy)
+
+switch accuracy
+    case 'low'
+        OPT_radauCollocation.nColPts = 10;
+    case 'medium'
+        OPT_radauCollocation.nColPts = 20;
+    case 'high'
+        OPT_radauCollocation.nColPts = 20;
+    otherwise
+        error('Invalid value for options.defaultAccuracy')
+end
+
+end
+
+
