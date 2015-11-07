@@ -77,10 +77,10 @@ problem.guess.control = [0, 0];
 
 % method = 'trapazoid';
 % method = 'hermiteSimpson';
-% method = 'chebyshev';
+method = 'chebyshev';
 % method = 'rungeKutta';
 % method = 'gpops';
-method = 'radauCollocation';
+% method = 'radauCollocation';
 
 switch method
     case 'trapazoid'
@@ -146,7 +146,7 @@ switch method
         problem.options(2).verbose = 3; % How much to print out?
         problem.options(2).method = 'chebyshev'; % Select the transcription method
         problem.options(2).chebyshev.nColPts = 15;  %method-specific options
-     
+        
     case 'rungeKutta'
         problem.options(1).method = 'rungeKutta'; % Select the transcription method
         problem.options(1).defaultAccuracy = 'low';
@@ -157,9 +157,12 @@ switch method
         problem.options.method = 'gpops';
         problem.options.defaultAccuracy = 'medium';
         
-    case 'radauCollocation'       
-        problem.options.method = 'radauCollocation'; % Select the transcription method
-        problem.options.defaultAccuracy = 'low';
+    case 'radauCollocation'
+        problem.options(1).method = 'radauCollocation'; % Select the transcription method
+        problem.options(1).defaultAccuracy = 'low';
+        
+        problem.options(2).method = 'radauCollocation'; % Select the transcription method
+        problem.options(2).defaultAccuracy = 'medium';
         
     otherwise
         error('Invalid method!');
@@ -193,7 +196,7 @@ uInt = soln(end).interp.control(tInt);
 %                     Plot the solution                                   %
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 
-figure(100); clf;
+figure(101); clf;
 
 subplot(3,1,1); hold on;
 plot(tInt,q1Int,'r-'); plot(tInt,q2Int,'b-');
